@@ -30,6 +30,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+    // The update flow tests drive real progress intervals, and a scan followed
+    // by an install runs longer than the 5s default.
+    testTimeout: 20000,
     server: {
       deps: {
         inline: ['@cake-admin/cakeand'],

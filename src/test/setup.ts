@@ -20,3 +20,11 @@ class ResizeObserverMock {
 }
 
 window.ResizeObserver = ResizeObserverMock;
+
+// jsdom implements no Pointer Capture API, which Radix's pointer-driven
+// primitives (Switch, Slider) call during user-event interactions.
+if (!Element.prototype.hasPointerCapture) {
+  Element.prototype.hasPointerCapture = () => false;
+  Element.prototype.setPointerCapture = () => {};
+  Element.prototype.releasePointerCapture = () => {};
+}

@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Global rules
 
-- Figma node `2076:14773` is the visual source of truth.
+- Figma node `2076:14773` is the visual source of truth for Home, and nodes
+  `2389:28635`, `2725:28249`, `2754:29544`, `2754:29591`, `2754:29351`, and
+  `2754:29410` for the check-for-updates flow.
 - Cake& v4.2.4 is the component and token source of truth.
 - Reuse Cake& components before writing custom UI.
 - Use only Cake& CSS custom properties for visual values.

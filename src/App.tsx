@@ -16,6 +16,10 @@ import { Dashboard } from './components/dashboard/Dashboard.js';
 import { ScenarioControl } from './components/prototype/ScenarioControl.js';
 import { AppShell } from './components/shell/AppShell.js';
 import { CommandBar } from './components/shell/CommandBar.js';
+import { SystemUpdatePanel } from './components/updates/SystemUpdatePanel.js';
+import { UpdateDetailsModal } from './components/updates/UpdateDetailsModal.js';
+import { UpdateFlowToast } from './components/updates/UpdateFlowToast.js';
+import { useUpdateFlow } from './components/updates/useUpdateFlow.js';
 import {
   actionDelayMs,
   navigationItems,
@@ -66,7 +70,9 @@ const ToastViewport = styled(RadixToast.Viewport)`
   right: var(--space-500);
   bottom: var(--space-500);
   display: grid;
-  width: min(28rem, calc(100vw - (2 * var(--space-500))));
+  /* 480px is the width Cake& gives the complex toast layout and the width the
+     Figma update frames are drawn at; a narrower viewport would clip them. */
+  width: min(480px, calc(100vw - (2 * var(--space-500))));
   margin: 0;
   padding: 0;
   gap: var(--space-200);
@@ -94,11 +100,14 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [promotionIndex, setPromotionIndex] = useState(0);
   const [supportIndex, setSupportIndex] = useState(0);
-  const [updating, setUpdating] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [service, setService] = useState<PartnerService | null>(null);
   const [scanState, setScanState] = useState<ScanState>('idle');
+  const [failScan, setFailScan] = useState(false);
+  const [updateDetailsOpen, setUpdateDetailsOpen] = useState(false);
   const showControls = new URLSearchParams(window.location.search).get('controls') === 'true';
+
+  const updateFlow = useUpdateFlow({ failScan });
 
   const selectedItem = useMemo(
     () => navigationItems.find((item) => item.id === selected) ?? navigationItems[0],
@@ -113,12 +122,8 @@ export default function App() {
   }, []);
 
   const checkUpdates = () => {
-    setUpdating(true);
-    notify('Checking for updates');
-    window.setTimeout(() => {
-      setUpdating(false);
-      notify('Your system is up to date', 'success');
-    }, actionDelayMs);
+    setSelected('system-update');
+    updateFlow.startScan();
   };
 
   useEffect(() => {
@@ -142,7 +147,7 @@ export default function App() {
         onQueryChange={setQuery}
         onAction={notify}
         onCheckUpdates={checkUpdates}
-        updating={updating}
+        updating={updateFlow.busy}
       />
       {query ? (
         <SearchMessage aria-live="polite">
@@ -161,6 +166,15 @@ export default function App() {
             setService(nextService);
             setScanState('idle');
           }}
+        />
+      ) : item.id === 'system-update' ? (
+        <SystemUpdatePanel
+          phase={updateFlow.phase}
+          busy={updateFlow.busy}
+          failScan={failScan}
+          onFailScanChange={setFailScan}
+          onScan={updateFlow.startScan}
+          onInstall={updateFlow.install}
         />
       ) : (
         <EmptyCard>
@@ -189,6 +203,10 @@ export default function App() {
           onSelectedChange={setSelected}
           renderPanel={renderPanel}
         />
+        <UpdateFlowToast
+          flow={updateFlow}
+          onViewDetails={() => setUpdateDetailsOpen(true)}
+        />
         {notice ? (
           <Toast
             key={notice.id}
@@ -204,6 +222,13 @@ export default function App() {
         ) : null}
         <ToastViewport aria-label="Notifications" />
       </RadixToast.Provider>
+
+      <UpdateDetailsModal
+        open={updateDetailsOpen}
+        phase={updateFlow.phase}
+        progress={updateFlow.progress}
+        onClose={() => setUpdateDetailsOpen(false)}
+      />
 
       <Modal
         open={service !== null}
