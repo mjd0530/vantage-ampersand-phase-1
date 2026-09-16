@@ -4,12 +4,15 @@ import styled from 'styled-components';
 
 import wallpaper from '../../assets/wallpaper.png';
 import type { NavigationItem } from '../../data/vantageData.js';
+import { isDesktopShell } from '../../desktop/windowApi.js';
 import { AppSidebar } from './AppSidebar.js';
 import { TitleBar } from './TitleBar.js';
 
-const Desktop = styled.div`
+const Desktop = styled.div<{ $nativeWindow?: boolean }>`
   min-width: 1180px;
   min-height: 100vh;
+  height: ${(props) => (props.$nativeWindow ? '100vh' : 'auto')};
+  overflow: ${(props) => (props.$nativeWindow ? 'hidden' : 'visible')};
   background-image: url(${wallpaper});
   background-position: center;
   background-size: cover;
@@ -55,8 +58,10 @@ export function AppShell({
   onSelectedChange,
   renderPanel,
 }: AppShellProps) {
+  const nativeWindow = isDesktopShell();
+
   return (
-    <Desktop>
+    <Desktop $nativeWindow={nativeWindow} data-desktop-shell={nativeWindow ? 'true' : undefined}>
       <Window data-node-id="2076:14774">
         <TitleBar />
         <ShellTabs

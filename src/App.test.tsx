@@ -1,9 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import App from './App.js';
+
+afterEach(() => {
+  delete window.vantageDesktop;
+});
 
 describe('Vantage Ampersand prototype', () => {
   it('renders the Figma Home dashboard with Cake content', () => {
@@ -65,6 +69,26 @@ describe('Vantage Ampersand prototype', () => {
     expect(
       screen.getByRole('heading', { name: 'Lenovo Smart performance' }),
     ).toBeInTheDocument();
+  });
+
+  it('runs caption controls when launched as a desktop Windows app', async () => {
+    const user = userEvent.setup();
+    const desktop = {
+      isDesktop: true,
+      minimize: vi.fn(),
+      maximize: vi.fn(),
+      close: vi.fn(),
+    };
+    window.vantageDesktop = desktop;
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: 'Minimize' }));
+    await user.click(screen.getByRole('button', { name: 'Maximize' }));
+    await user.click(screen.getByRole('button', { name: 'Close' }));
+
+    expect(desktop.minimize).toHaveBeenCalledTimes(1);
+    expect(desktop.maximize).toHaveBeenCalledTimes(1);
+    expect(desktop.close).toHaveBeenCalledTimes(1);
   });
 
   it('has no detectable axe violations in the default view', async () => {

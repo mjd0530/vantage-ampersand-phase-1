@@ -8,7 +8,7 @@ alwaysApply: true
 ## State
 Phase: VALIDATE
 Status: COMPLETED
-Epic: VA-P1
+Epic: VA-P1 / Phase 5 Windows-app launch
 
 ## Plan
 1. Scaffold the official Cake& starter and validation tooling.
@@ -31,6 +31,7 @@ Epic: VA-P1
 - validation: complete
 
 ## Log
+- Added Electron local launch (`npm run start:windows`) with frameless 1440×1080 chrome.
 - Confirmed work is on `cursor/phase-1-setup-d257`.
 - Inspected Figma node `2076:14773`; no authored motion tracks were found.
 - Confirmed Cake& v4.2.4 starter and component/token contracts.

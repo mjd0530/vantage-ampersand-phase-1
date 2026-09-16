@@ -1,7 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
+const isElectron = process.env.ELECTRON === '1';
+
 export default defineConfig({
+  base: isElectron ? './' : '/',
   plugins: [react()],
   build: {
     rollupOptions: {
@@ -47,5 +50,10 @@ export default defineConfig({
     dedupe: ['styled-components', 'react', 'react-dom'],
   },
 
-  server: { open: true },
+  server: {
+    open: !isElectron,
+    host: isElectron ? '127.0.0.1' : undefined,
+    port: 5173,
+    strictPort: isElectron,
+  },
 });

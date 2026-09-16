@@ -92,15 +92,20 @@ You need [Node.js](https://nodejs.org/) (LTS). That gives you `npm`. Open a
 terminal and run the steps below. A slower, plain-language walkthrough is on
 the Storybook [Introduction](https://cake.lenovo.com/storybook/?path=/docs/introduction--docs).
 
-## Start
+## Start as a Windows app
 
 ```bash
 npm install
-npm run dev
+npm run start:windows
 ```
 
-Then open the local URL Vite prints, normally
-[`http://localhost:5173`](http://localhost:5173).
+This boots the Vite renderer and opens Lenovo Vantage in a frameless 1440×1080
+desktop window (Electron) with a draggable title bar and working minimize,
+maximize, and close controls. Use this for local Windows-app review.
+
+On Windows, macOS, and Linux the same command launches the native desktop
+window. A browser-only session is still available with `npm run dev`, which
+prints a URL, normally [`http://localhost:5173`](http://localhost:5173).
 
 This repository was originally scaffolded from:
 

@@ -11,6 +11,7 @@ alwaysApply: true
 - Vite 8
 - Cake& v4.2.4
 - styled-components
+- Electron (local Windows-app shell)
 - Vitest and Testing Library
 
 ## Critical Patterns & Conventions
@@ -22,4 +23,5 @@ alwaysApply: true
 - Use semantic HTML and native controls where Cake& has no primitive.
 
 ## Changelog
+- Added a local Electron Windows-app launch path (`npm run start:windows`) with frameless chrome and live caption controls.
 - Completed the Figma-accurate Vantage Ampersand Phase 1 Home prototype with Cake& components, tokenized Mica styling, interactions, scenario states, and automated accessibility validation.

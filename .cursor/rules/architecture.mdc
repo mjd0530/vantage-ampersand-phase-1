@@ -12,6 +12,9 @@ alwaysApply: true
 - `styled-components` for prototype-specific composition.
 - Cake& CSS custom properties for every visual value.
 - `lucide-react` or exact exported Figma assets for icons.
+- Electron frameless shell (`electron/`) for local Windows-app launch via
+  `npm run start:windows`. Caption controls talk to the main process through
+  `window.vantageDesktop` from `electron/preload.mjs`.
 
 ## Structure
 
@@ -21,6 +24,8 @@ alwaysApply: true
 - `src/data/`: typed mock data, thresholds, and state fixtures.
 - `src/assets/`: exact downloaded Figma assets.
 - `src/styles/`: token-only layout and global prototype composition.
+- `src/desktop/`: typed bridge to the Electron window APIs.
+- `electron/`: desktop main process, preload bridge, and local launch script.
 - `src/test/`: test setup and accessibility helpers.
 
 ## State flow

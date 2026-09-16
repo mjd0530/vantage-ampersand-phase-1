@@ -28,3 +28,7 @@ Status: Complete
 - [x] Pass lint, type checking, tests, build, accessibility, and bundle checks.
 - [x] Compare the running app with Figma at 1440×1080.
 - [x] Document Cake& reuse, gaps, assumptions, and validation.
+
+### Phase 5 — Local Windows-app launch
+- [x] Wrap the prototype in a frameless Electron window.
+- [x] Wire title-bar caption controls and local `npm run start:windows` launch.

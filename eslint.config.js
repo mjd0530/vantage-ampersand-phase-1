@@ -27,12 +27,14 @@ export default tseslint.config(
     },
   },
   {
-    files: ['scripts/**/*.mjs'],
+    files: ['scripts/**/*.mjs', 'electron/**/*.mjs'],
     languageOptions: {
       globals: {
         fetch: 'readonly',
         process: 'readonly',
         URL: 'readonly',
+        console: 'readonly',
+        setTimeout: 'readonly',
       },
     },
   },

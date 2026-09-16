@@ -2,6 +2,7 @@ import { Minus, Square, X } from 'lucide-react';
 import styled from 'styled-components';
 
 import vantageTitleIcon from '../../assets/vantage-title-icon.svg';
+import { getDesktopApi } from '../../desktop/windowApi.js';
 
 const Bar = styled.header`
   position: relative;
@@ -13,6 +14,8 @@ const Bar = styled.header`
   background: var(--color-surfaces-canvas);
   color: var(--color-text-icon-primary);
   user-select: none;
+  -webkit-app-region: drag;
+  app-region: drag;
 `;
 
 const Identity = styled.div`
@@ -33,6 +36,8 @@ const AppIcon = styled.img`
 const WindowControls = styled.div`
   display: flex;
   align-self: stretch;
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
 `;
 
 const CaptionButton = styled.button`
@@ -43,6 +48,8 @@ const CaptionButton = styled.button`
   border: 0;
   background: transparent;
   color: var(--color-text-icon-primary);
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
 
   svg {
     width: var(--space-200);
@@ -69,6 +76,8 @@ const CaptionButton = styled.button`
 `;
 
 export function TitleBar() {
+  const desktop = getDesktopApi();
+
   return (
     <Bar data-node-id="2076:14775">
       <Identity>
@@ -76,13 +85,31 @@ export function TitleBar() {
         <span>Lenovo Vantage</span>
       </Identity>
       <WindowControls aria-label="Window controls">
-        <CaptionButton type="button" aria-label="Minimize">
+        <CaptionButton
+          type="button"
+          aria-label="Minimize"
+          onClick={() => {
+            void desktop?.minimize();
+          }}
+        >
           <Minus aria-hidden="true" />
         </CaptionButton>
-        <CaptionButton type="button" aria-label="Maximize">
+        <CaptionButton
+          type="button"
+          aria-label="Maximize"
+          onClick={() => {
+            void desktop?.maximize();
+          }}
+        >
           <Square aria-hidden="true" />
         </CaptionButton>
-        <CaptionButton type="button" aria-label="Close">
+        <CaptionButton
+          type="button"
+          aria-label="Close"
+          onClick={() => {
+            void desktop?.close();
+          }}
+        >
           <X aria-hidden="true" />
         </CaptionButton>
       </WindowControls>
