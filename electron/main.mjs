@@ -2,6 +2,10 @@ import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+app.disableHardwareAcceleration();
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('no-sandbox');
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const devUrl = process.env.VANTAGE_DEV_URL ?? 'http://127.0.0.1:5173';
 const useDevServer = process.env.VANTAGE_DEV_URL !== undefined || !app.isPackaged;

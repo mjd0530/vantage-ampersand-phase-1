@@ -76,7 +76,11 @@ try {
   shutDown(1);
 }
 
-const electronApp = spawnProcess(electronBinary, [root], {
+const electronApp = spawnProcess(electronBinary, [
+  root,
+  '--disable-gpu',
+  '--no-sandbox',
+], {
   ELECTRON: '1',
   VANTAGE_DEV_URL: devUrl,
 });
