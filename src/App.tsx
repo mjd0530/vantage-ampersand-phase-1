@@ -70,7 +70,9 @@ const ToastViewport = styled(RadixToast.Viewport)`
   right: var(--space-500);
   bottom: var(--space-500);
   display: grid;
-  width: min(28rem, calc(100vw - (2 * var(--space-500))));
+  /* 480px is the width Cake& gives the complex toast layout and the width the
+     Figma update frames are drawn at; a narrower viewport would clip them. */
+  width: min(480px, calc(100vw - (2 * var(--space-500))));
   margin: 0;
   padding: 0;
   gap: var(--space-200);
