@@ -23,3 +23,4 @@ alwaysApply: true
 
 ## Changelog
 - Completed the Figma-accurate Vantage Ampersand Phase 1 Home prototype with Cake& components, tokenized Mica styling, interactions, scenario states, and automated accessibility validation.
+- Implemented the six-state check-for-updates toast flow on the System update destination from Figma nodes 2389:28635, 2725:28249, 2754:29544, 2754:29591, 2754:29351, and 2754:29410, over Cake& Toast parts and tokens.

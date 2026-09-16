@@ -19,6 +19,35 @@ The populated Home screen is the approved visual scope. The linked frame does
 not contain CPU, GPU, memory, or destination-page designs, so those views are
 not invented; non-Home destinations explicitly identify that Phase 1 boundary.
 
+## Check for updates flow
+
+The System update destination implements the six `&toast.complex` frames that
+cover checking for, installing, and failing to find updates:
+
+| Figma node | State | Interaction |
+| --- | --- | --- |
+| [`2389:28635`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2389-28635&m=dev) | Scanning for updates | Determinate track; **Cancel** returns to idle, **View details** opens the dialog. Resolves into Updates found or Update scan failed. |
+| [`2725:28249`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2725-28249&m=dev) | Updates found | **View details**, **Scan again**, **Install**. |
+| [`2754:29544`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2754-29544&m=dev) | Installing updates | **Cancel** steps back to Updates found rather than closing. Resolves into success. |
+| [`2754:29591`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2754-29591&m=dev) | Updates successfully installed | Secondary and primary actions, as designed. |
+| [`2754:29351`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2754-29351&m=dev) | Update scan failed | **More** expands the detail row; **Scan again** retries. |
+| [`2754:29410`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2754-29410&m=dev) | Update scan failed, expanded | **Less** collapses it again. |
+
+Start the flow from **Check for updates** in the Home command bar or on the
+System update page. The panel carries a prototype-only switch that makes the
+next scan fail, so the two failure frames are reachable without editing code.
+
+### Findings in the source frames
+
+Two things in these frames look like placeholder content rather than intended
+copy. Both are implemented as drawn and isolated in `src/data/updateFlow.ts` so
+a single edit fixes each:
+
+- Node `2754:29591` gives its secondary and primary actions the same
+  "View details" label, so the success toast offers the same action twice.
+- Node `2754:29410` repeats the toast description verbatim inside the expanded
+  "Less" detail row, so **More** reveals the sentence the user just read.
+
 ## Cake& reuse
 
 The app consumes `@cake-admin/cakeand` from its version-pinned public release
@@ -45,6 +74,18 @@ also be linked directly with `?scenario=loading` (or `empty`, `error`,
 
 ## System gaps
 
+- Cake&'s `Toast` with `layout="complex"` is the same Figma component the update
+  frames use, but its complex layout renders only the icon/text/dismiss row and
+  the indented footer. Four of the six update frames place a full-width row
+  between them — the progress track and the More/Less disclosure — and Cake&
+  exports no toast with that slot. `UpdateToast` therefore mirrors Cake&'s own
+  complex toast (same Radix primitive, same tokens, same 480px width) and adds
+  the middle slot; the buttons, dismiss control, and progress track inside it
+  are still Cake& components.
+- Cake& does not export its toast status icons, and these frames use the filled
+  Motorola glyphs rather than the outlined lucide set Cake& defaults to.
+  `UpdateGlyphs` carries the exact exported Figma path geometry with
+  `currentColor`, so the semantic Cake& token still supplies the color.
 - Cake& documents the Windows `container blur high` recipe but does not export
   an application-window component, so the shell composes the official surface,
   OS stroke, elevation, and blur tokens locally.
@@ -66,7 +107,8 @@ npm test
 npm run build
 ```
 
-Validation covers six interaction/accessibility tests, including an axe scan.
+Validation covers fifteen interaction/accessibility tests, including axe scans
+of the default view and of a running update scan.
 The production build is split into app, Cake&, React, and icon chunks with no
 Vite size warning. Chrome geometry at a 1440×1080 viewport is:
 

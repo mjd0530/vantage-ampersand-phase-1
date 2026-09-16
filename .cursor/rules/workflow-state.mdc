@@ -8,14 +8,16 @@ alwaysApply: true
 ## State
 Phase: VALIDATE
 Status: COMPLETED
-Epic: VA-P1
+Epic: VA-P2
 
 ## Plan
-1. Scaffold the official Cake& starter and validation tooling.
-2. Build the Figma-matched shell and dashboard from Cake& components/tokens.
-3. Add typed local scenarios and accessible interactions.
-4. Validate against tests, browser behavior, accessibility, and Figma.
-5. Document findings and delivery status.
+1. Pull the six Figma update frames with variables, assets, and component docs.
+2. Confirm what Cake& already exports and record any genuine gap.
+3. Add typed update fixtures, copy, and flow timings.
+4. Compose the toast surface and the six states from Cake& parts and tokens.
+5. Wire the command bar and System update destination into the flow.
+6. Validate with lint, types, tests, axe, build, and a browser pass.
+7. Update the README and rule docs with reuse, gaps, and findings.
 
 ## Rules
 - Follow `.cursor/rules/rules.mdc` and `.cursor/rules/architecture.mdc`.
@@ -24,21 +26,39 @@ Epic: VA-P1
 
 ## Items
 - source-gates: complete
-- scaffold: complete
-- shell: complete
-- dashboard: complete
-- interactions: complete
+- fixtures: complete
+- toast-surface: complete
+- flow-states: complete
+- integration: complete
 - validation: complete
+- documentation: complete
 
 ## Log
-- Confirmed work is on `cursor/phase-1-setup-d257`.
-- Inspected Figma node `2076:14773`; no authored motion tracks were found.
-- Confirmed Cake& v4.2.4 starter and component/token contracts.
-- `cake-admin/ai-lab` is not accessible; using approved `cake-admin/cakev2` fallback.
-- Scaffolded the official Cake& starter and added lint/test/a11y tooling.
-- Implemented the Figma shell, dashboard composition, local scenarios, and interactions.
-- Passed lint, strict type checking, six tests, axe, and the production build.
-- Verified exact 1440×1080 geometry and asset sizing against Figma.
-- Pushed all commits; PR creation was denied because the actor is not a collaborator.
+- Branch started from a stale checkout that appeared to be an empty repo; the
+  first pass shipped a standalone HTML/CSS/JS prototype.
+- Fetched `origin/main`, found the Cake& app, merged it, and rebuilt the flow on
+  the real stack.
+- Retrieved all six toast frames plus variables; Figma's 480 width and color
+  values match the Cake& tokens exactly.
+- Cake& `Toast` complex layout is the same Figma component but exposes no slot
+  between its header and footer rows; recorded as a design-system gap and
+  composed `UpdateToast` over the same Radix primitive and tokens.
+- Replaced the ad-hoc "Checking for updates" notice with the real flow machine.
+- Moved phase advancement into the progress interval to satisfy the
+  set-state-in-effect and refs-during-render lint rules.
+- Passed lint, strict type checking, fifteen tests including two axe scans, and
+  the production build.
+- Flagged two placeholder strings in the source frames rather than inventing
+  replacement copy.
 
 ## ArchiveLog
+- VA-P1 delivered the Figma-accurate Home prototype: Cake& starter scaffold,
+  Mica shell and dashboard, typed local scenarios, and accessibility tooling.
+- VA-P1 validation passed lint, strict types, six tests, axe, and the build, and
+  verified 1440×1080 geometry against Figma.
+- VA-P1 recorded the AI Lab access gap and used the approved `cake-admin/cakev2`
+  release fallback.
+- VA-P1 composed the OS window chrome, radial gauges, and pager dots locally
+  because Cake& exports no equivalents.
+- VA-P1 pushed all commits; PR creation was denied because the actor is not a
+  collaborator.

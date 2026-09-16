@@ -28,3 +28,24 @@ Status: Complete
 - [x] Pass lint, type checking, tests, build, accessibility, and bundle checks.
 - [x] Compare the running app with Figma at 1440×1080.
 - [x] Document Cake& reuse, gaps, assumptions, and validation.
+
+## Epic VA-P2: Check for updates flow
+
+Status: Complete
+
+### Phase 1 — Source alignment
+- [x] Inspect Figma nodes `2389:28635`, `2725:28249`, `2754:29544`,
+      `2754:29591`, `2754:29351`, and `2754:29410` with variables and assets.
+- [x] Confirm Cake& `Toast` complex layout is the same Figma component and
+      record the missing middle-row slot as a design-system gap.
+
+### Phase 2 — Implementation
+- [x] Add the typed update fixtures, copy, and flow timings.
+- [x] Compose the toast surface with the Figma middle slot over Cake& parts.
+- [x] Implement the six states, the More/Less disclosure, and the details dialog.
+- [x] Wire the command bar and System update destination into the flow.
+
+### Phase 3 — Validation
+- [x] Pass lint, strict type checking, fifteen tests, axe, and the build.
+- [x] Verify every state and transition in a browser.
+- [x] Document the Cake& gaps and the placeholder copy found in the frames.

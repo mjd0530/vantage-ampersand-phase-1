@@ -17,6 +17,8 @@ alwaysApply: true
 
 - `src/components/shell/`: Windows frame, title bar, sidebar, and command bar.
 - `src/components/dashboard/`: Home dashboard cards and status visuals.
+- `src/components/updates/`: the check-for-updates toast flow, its state
+  machine, details dialog, and System update panel.
 - `src/components/prototype/`: non-production scenario controls.
 - `src/data/`: typed mock data, thresholds, and state fixtures.
 - `src/assets/`: exact downloaded Figma assets.
@@ -31,8 +33,21 @@ dashboard components. `AppShell` owns the sidebar collapsed state, because the
 rail width and the workspace grid column must change together. No backend or
 persistence is introduced in Phase 1.
 
+The update flow is the one stateful feature with its own machine: `useUpdateFlow`
+owns the phase, progress, and failure disclosure, and advances phases from a
+single interval so no effect writes state synchronously. `App` holds only the
+inputs the flow cannot own — whether the next scan should fail, and whether the
+details dialog is open. Presentational pieces (`UpdateFlowToast`,
+`SystemUpdatePanel`) receive the flow and render a phase.
+
 ## Design-system gaps
 
 Figma-specific radial status gauges, pager dots, Windows caption controls, and
 the OS Mica shell recipe may be composed locally only when Cake& has no exported
 equivalent. Each local composition must use Cake& tokens and be documented.
+
+`UpdateToast` is such a composition: Cake&'s complex `Toast` layout has no slot
+between its header and footer rows, which the progress and More/Less update
+frames require. It mirrors Cake&'s own complex toast — same Radix primitive,
+tokens, and 480px width — and keeps Cake& `Button`, `IconButton`, and
+`ProgressBar` inside. Prefer widening Cake& upstream over extending this copy.
