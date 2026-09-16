@@ -2,7 +2,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ContactRound,
-  Copy,
   Download,
   ExternalLink,
   Headphones,
@@ -34,6 +33,7 @@ import {
   type Scenario,
   type SupportAction,
 } from '../../data/vantageData.js';
+import { DeviceInfoCard } from './DeviceInfoCard.js';
 import { StatusCard } from './StatusCard.js';
 
 const Grid = styled.div`
@@ -89,43 +89,6 @@ const CardTitle = styled.h2`
   line-height: 1.35;
   text-overflow: ellipsis;
   white-space: nowrap;
-`;
-
-const DeviceRows = styled.div`
-  display: grid;
-  flex: 1;
-  margin: 0;
-  overflow: hidden;
-  border: var(--stroke-100) solid var(--color-stroke-border);
-  border-radius: var(--radius-300);
-  background: var(--color-surfaces-container);
-`;
-
-const DeviceRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr var(--space-600);
-  align-items: center;
-  gap: var(--space-300);
-  padding-inline: var(--space-300) var(--space-100);
-  border-bottom: var(--stroke-100) solid var(--color-stroke-border);
-  color: var(--color-text-icon-primary);
-  font-size: var(--type-size-body);
-  font-weight: var(--font-weight-medium);
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  span {
-    margin: 0;
-  }
-
-  .device-value {
-    overflow: hidden;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 `;
 
 const SupportGrid = styled.div`
@@ -384,40 +347,15 @@ export function Dashboard({
   return (
     <Grid aria-label="Vantage home dashboard" data-node-id="2076:14828">
       <DeviceSlot>
-        <FixedCard>
-          <CardBody aria-labelledby="device-heading">
-            <CardHeader>
-              <CardTitle id="device-heading">{device.name}</CardTitle>
-              <IconButton
-                label="Device options"
-                icon={<MoreVertical />}
-                size="sm"
-                intent="secondary"
-                variant="ghost"
-                onClick={() => onNotify('Device options opened')}
-              />
-            </CardHeader>
-            <DeviceRows>
-              {device.details.map((detail) => (
-                <DeviceRow key={detail.label}>
-                  <span>{detail.label}</span>
-                  <span className="device-value">{detail.value}</span>
-                  <IconButton
-                    label={`Copy ${detail.label}`}
-                    icon={<Copy />}
-                    size="sm"
-                    intent="secondary"
-                    variant="ghost"
-                    onClick={() => {
-                      void navigator.clipboard.writeText(detail.value);
-                      onNotify(`${detail.label} copied`, 'success');
-                    }}
-                  />
-                </DeviceRow>
-              ))}
-            </DeviceRows>
-          </CardBody>
-        </FixedCard>
+        <DeviceInfoCard
+          name={device.name}
+          details={device.details}
+          onMenu={() => onNotify('Device options opened')}
+          onCopy={(detail) => {
+            void navigator.clipboard.writeText(detail.value);
+            onNotify(`${detail.label} copied`, 'success');
+          }}
+        />
       </DeviceSlot>
 
       <StatusCard
