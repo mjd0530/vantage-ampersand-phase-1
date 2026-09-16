@@ -22,4 +22,5 @@ alwaysApply: true
 - Use semantic HTML and native controls where Cake& has no primitive.
 
 ## Changelog
+- Added all five Figma `CardDeviceInfo` variants with exact assets, typed actions, and cross-theme validation.
 - Completed the Figma-accurate Vantage Ampersand Phase 1 Home prototype with Cake& components, tokenized Mica styling, interactions, scenario states, and automated accessibility validation.

@@ -8,8 +8,8 @@ with the released Cake& v4.2.4 Dev Kit.
 
 - Windows 11 title bar and token-driven Mica application shell
 - Cake& sidebar navigation and Home command bar
-- Device identity, battery, warranty, support, offer, Smart Performance, and
-  Smart Lock cards
+- All five Figma device-information card sizes, plus battery, warranty, support,
+  offer, Smart Performance, and Smart Lock cards
 - Copy feedback, support/offer pagers, navigation panels, update flow, service
   scan modal, and success/error messaging
 - Deterministic loading, empty, error, and success review states
@@ -66,7 +66,8 @@ npm test
 npm run build
 ```
 
-Validation covers six interaction/accessibility tests, including an axe scan.
+Validation covers 17 component, interaction, and accessibility tests, including
+axe scans in the default Home view and the dark-theme `xlrg` card.
 The production build is split into app, Cake&, React, and icon chunks with no
 Vite size warning. Chrome geometry at a 1440×1080 viewport is:
 

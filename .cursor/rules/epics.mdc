@@ -28,3 +28,9 @@ Status: Complete
 - [x] Pass lint, type checking, tests, build, accessibility, and bundle checks.
 - [x] Compare the running app with Figma at 1440×1080.
 - [x] Document Cake& reuse, gaps, assumptions, and validation.
+
+### Phase 5 — Device information card variants
+- [x] Inspect Figma component set `2027:63095` and its exact exported assets.
+- [x] Implement the `xml`, `sml`, `med`, `lrg`, and `xlrg` variants.
+- [x] Wire menu, row-copy, About your device, and Copy all actions.
+- [x] Validate every variant, both themes, accessibility, and Home geometry.

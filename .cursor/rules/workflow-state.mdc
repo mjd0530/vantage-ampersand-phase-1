@@ -16,6 +16,7 @@ Epic: VA-P1
 3. Add typed local scenarios and accessible interactions.
 4. Validate against tests, browser behavior, accessibility, and Figma.
 5. Document findings and delivery status.
+6. Extend `CardDeviceInfo` to all five Figma variants and validate its actions.
 
 ## Rules
 - Follow `.cursor/rules/rules.mdc` and `.cursor/rules/architecture.mdc`.
@@ -29,6 +30,7 @@ Epic: VA-P1
 - dashboard: complete
 - interactions: complete
 - validation: complete
+- device-info-variants: complete
 
 ## Log
 - Confirmed work is on `cursor/phase-1-setup-d257`.
@@ -37,7 +39,9 @@ Epic: VA-P1
 - `cake-admin/ai-lab` is not accessible; using approved `cake-admin/cakev2` fallback.
 - Scaffolded the official Cake& starter and added lint/test/a11y tooling.
 - Implemented the Figma shell, dashboard composition, local scenarios, and interactions.
-- Passed lint, strict type checking, six tests, axe, and the production build.
+- Implemented all five variants from Figma component set `2027:63095` with exact SVG assets.
+- Wired row/menu actions and the `xlrg` About your device and Copy all actions.
+- Passed lint, strict type checking, 17 tests, axe, and the production build.
 - Verified exact 1440×1080 geometry and asset sizing against Figma.
 - Pushed all commits; PR creation was denied because the actor is not a collaborator.
 
