@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The cake& dependency is a URL tarball with no committed lockfile, which
+      # trips an arborist crash on the npm bundled with Node 20.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - uses: dtolnay/rust-toolchain@stable
 
