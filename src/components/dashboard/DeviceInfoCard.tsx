@@ -131,13 +131,15 @@ const DetailValue = styled.span<{ $size: DeviceInfoCardSize }>`
   white-space: nowrap;
 `;
 
-const IconGlyph = styled.span<{ $asset: string; $size: string }>`
+const IconGlyph = styled.img<{ $size: string }>`
   display: block;
   width: ${({ $size }) => $size};
   height: ${({ $size }) => $size};
-  background: var(--color-text-icon-primary);
-  -webkit-mask: url(${({ $asset }) => $asset}) center / contain no-repeat;
-  mask: url(${({ $asset }) => $asset}) center / contain no-repeat;
+
+  :root[data-theme='dark.a'] &,
+  [data-theme='dark.a'] & {
+    filter: invert(1);
+  }
 `;
 
 const Actions = styled.footer`
@@ -179,11 +181,19 @@ export function DeviceInfoCard({
   onMenu,
   onCopy,
   size = 'lrg',
-  onAboutDevice,
-  onCopyAll,
+  ...actionProps
 }: DeviceInfoCardProps) {
   const headingId = useId();
   const compactControls = size === 'xml' || size === 'sml';
+  const extraLargeActions =
+    size === 'xlrg' &&
+    typeof actionProps.onAboutDevice === 'function' &&
+    typeof actionProps.onCopyAll === 'function'
+      ? {
+          onAboutDevice: actionProps.onAboutDevice,
+          onCopyAll: actionProps.onCopyAll,
+        }
+      : null;
 
   return (
     <SizedCard $size={size} data-node-id={nodeIds[size]} data-size={size}>
@@ -194,8 +204,9 @@ export function DeviceInfoCard({
             label="Device options"
             icon={
               <IconGlyph
-                $asset={moreVerticalIcon}
+                src={moreVerticalIcon}
                 $size="var(--space-500)"
+                alt=""
                 aria-hidden="true"
               />
             }
@@ -214,10 +225,11 @@ export function DeviceInfoCard({
                 label={`Copy ${detail.label}`}
                 icon={
                   <IconGlyph
-                    $asset={compactControls ? contentCopySmallIcon : contentCopyIcon}
+                    src={compactControls ? contentCopySmallIcon : contentCopyIcon}
                     $size={
                       compactControls ? 'var(--space-300)' : 'var(--space-500)'
                     }
+                    alt=""
                     aria-hidden="true"
                   />
                 }
@@ -229,7 +241,7 @@ export function DeviceInfoCard({
             </DetailRow>
           ))}
         </Details>
-        {size === 'xlrg' ? (
+        {extraLargeActions ? (
           <Actions>
             <ActionButton
               size="sm"
@@ -237,12 +249,13 @@ export function DeviceInfoCard({
               variant="tonal"
               endIcon={
                 <IconGlyph
-                  $asset={openInNewIcon}
+                  src={openInNewIcon}
                   $size="var(--space-400)"
+                  alt=""
                   aria-hidden="true"
                 />
               }
-              onClick={onAboutDevice}
+              onClick={extraLargeActions.onAboutDevice}
             >
               About your device
             </ActionButton>
@@ -252,12 +265,13 @@ export function DeviceInfoCard({
               variant="tonal"
               endIcon={
                 <IconGlyph
-                  $asset={contentCopyAllIcon}
+                  src={contentCopyAllIcon}
                   $size="var(--space-400)"
+                  alt=""
                   aria-hidden="true"
                 />
               }
-              onClick={() => onCopyAll(details)}
+              onClick={() => extraLargeActions.onCopyAll(details)}
             >
               Copy all
             </ActionButton>
