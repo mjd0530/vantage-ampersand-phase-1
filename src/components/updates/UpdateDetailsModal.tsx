@@ -27,6 +27,8 @@ const List = styled.ul`
   display: grid;
   margin: 0;
   padding: 0;
+  /* Keep the severity badges clear of the scrollbar track. */
+  padding-right: var(--space-300);
   gap: var(--space-100);
   list-style: none;
 `;
