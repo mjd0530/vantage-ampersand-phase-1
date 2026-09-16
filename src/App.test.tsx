@@ -16,6 +16,18 @@ describe('Vantage Ampersand prototype', () => {
     expect(screen.getByRole('heading', { name: 'Support services' })).toBeInTheDocument();
   });
 
+  it('renders full Figma sidebar labels without truncation', () => {
+    render(<App />);
+
+    expect(
+      screen.getByRole('tab', { name: 'Lenovo Identity Advisor' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('tab', { name: 'Lenovo Smart Performance' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Home', selected: true })).toBeInTheDocument();
+  });
+
   it('navigates with the Cake sidebar tabs', async () => {
     const user = userEvent.setup();
     render(<App />);
