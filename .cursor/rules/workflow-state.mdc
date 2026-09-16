@@ -41,7 +41,7 @@ Epic: VA-P1
 - Implemented the Figma shell, dashboard composition, local scenarios, and interactions.
 - Implemented all five variants from Figma component set `2027:63095` with exact SVG assets.
 - Wired row/menu actions and the `xlrg` About your device and Copy all actions.
-- Passed lint, strict type checking, 17 tests, axe, and the production build.
+- Passed lint, strict type checking, 20 tests, axe, 80% coverage gates, and the production build.
 - Verified exact 1440×1080 geometry and asset sizing against Figma.
 - Pushed all commits; PR creation was denied because the actor is not a collaborator.
 

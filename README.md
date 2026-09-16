@@ -66,8 +66,9 @@ npm test
 npm run build
 ```
 
-Validation covers 17 component, interaction, and accessibility tests, including
-axe scans in the default Home view and the dark-theme `xlrg` card.
+Validation covers 20 component, interaction, and accessibility tests, including
+axe scans in the default Home view and the dark-theme `xlrg` card. Enforced
+coverage is above 80% for statements, branches, functions, and lines.
 The production build is split into app, Cake&, React, and icon chunks with no
 Vite size warning. Chrome geometry at a 1440×1080 viewport is:
 
