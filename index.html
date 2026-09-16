@@ -1,58 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--
+  data-theme MUST match the `mode` passed to <CakeProvider> in src/App.tsx.
+
+  CakeProvider sets this attribute on <html> in a layout effect, so the very
+  first paint uses whatever is written here. If the two disagree you get a
+  visible flash of the wrong theme before React catches up. Change both together.
+-->
+<html lang="en" data-theme="light.a">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1440" />
-    <title>Vantage — Check for updates</title>
-    <link rel="stylesheet" href="css/tokens.css" />
-    <link rel="stylesheet" href="css/app.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/src/assets/vantage-app-icon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Vantage redesigned through Ampersand with the Cake& design system"
+    />
+    <title>Lenovo Vantage</title>
   </head>
   <body>
-    <div class="desktop">
-      <section class="window" id="vantage-window" aria-label="Lenovo Vantage">
-        <div class="window__chrome">
-          <span class="window__title">Lenovo Vantage</span>
-          <div class="window__controls">
-            <button type="button" aria-label="Minimize">─</button>
-            <button type="button" aria-label="Maximize">☐</button>
-            <button class="close" type="button" aria-label="Close" onclick="document.getElementById('vantage-window').classList.add('hidden')">✕</button>
-          </div>
-        </div>
-        <div class="window__body">
-          <nav class="nav" aria-label="Vantage">
-            <button class="nav__item" type="button">Home</button>
-            <button class="nav__item" type="button" aria-current="page">System Update</button>
-            <button class="nav__item" type="button">Device</button>
-            <button class="nav__item" type="button">Support</button>
-          </nav>
-          <main class="content">
-            <h1>System Update</h1>
-            <p class="content__lede">Scan this PC and install recommended updates when they are available.</p>
-            <section class="device-card">
-              <div class="device-card__status" id="device-status">Ready to check for updates.</div>
-              <p class="device-card__meta">Last action uses the Ampersand toast flow from Figma (scan, found, install, success, and failure).</p>
-              <div class="device-card__actions">
-                <button class="btn btn--primary" id="check-for-updates" type="button">Check for updates</button>
-                <label class="scenario">
-                  <input id="simulate-failure" type="checkbox" />
-                  Simulate scan failure
-                </label>
-              </div>
-            </section>
-          </main>
-        </div>
-      </section>
-
-      <div class="toast-host" id="toast-stack">
-        <div id="details-host"></div>
-        <div id="toast-host"></div>
-      </div>
-
-      <footer class="taskbar">
-        <button class="taskbar__item" type="button" aria-label="Start">⊞</button>
-        <button class="taskbar__item" id="open-vantage" type="button" aria-pressed="true" aria-label="Lenovo Vantage">V</button>
-      </footer>
-    </div>
-    <script src="js/app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

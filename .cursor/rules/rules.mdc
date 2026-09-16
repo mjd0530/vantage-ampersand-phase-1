@@ -1,0 +1,15 @@
+---
+description: Vantage Ampersand Phase 1 implementation rules
+alwaysApply: true
+---
+
+# Global rules
+
+- Figma node `2076:14773` is the visual source of truth.
+- Cake& v4.2.4 is the component and token source of truth.
+- Reuse Cake& components before writing custom UI.
+- Use only Cake& CSS custom properties for visual values.
+- Preserve Figma-provided assets and their geometry.
+- Meet WCAG 2.2 AA and retain visible keyboard focus.
+- Keep local mock data separate from presentation.
+- Do not add another component or styling system.

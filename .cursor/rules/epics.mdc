@@ -1,0 +1,30 @@
+---
+description: Vantage Ampersand delivery epic
+alwaysApply: true
+---
+
+# Epics
+
+## Epic VA-P1: Vantage Ampersand Phase 1
+
+Status: Complete
+
+### Phase 1 — Source alignment
+- [x] Inspect target repository and branch.
+- [x] Inspect Figma node `2076:14773`, variables, hierarchy, assets, and motion.
+- [x] Inspect Cake& Dev Kit v4.2.4, Storybook inventory, and agent guidance.
+- [x] Record AI Lab access gap and approved Cake& canonical fallback.
+
+### Phase 2 — Foundation
+- [x] Scaffold the Cake& Vite/React/TypeScript starter.
+- [x] Add quality and accessibility tooling.
+
+### Phase 3 — Prototype
+- [x] Implement the Windows/Mica shell and navigation.
+- [x] Implement the Home dashboard and exact Figma assets.
+- [x] Implement interactions and deterministic prototype states.
+
+### Phase 4 — Validation
+- [x] Pass lint, type checking, tests, build, accessibility, and bundle checks.
+- [x] Compare the running app with Figma at 1440×1080.
+- [x] Document Cake& reuse, gaps, assumptions, and validation.
