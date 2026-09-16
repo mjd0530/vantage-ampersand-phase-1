@@ -1,0 +1,41 @@
+---
+description: Current implementation workflow state
+alwaysApply: true
+---
+
+# Workflow
+
+## State
+Phase: CONSTRUCT
+Status: IN_PROGRESS
+Epic: VA-P1
+
+## Plan
+1. Scaffold the official Cake& starter and validation tooling.
+2. Build the Figma-matched shell and dashboard from Cake& components/tokens.
+3. Add typed local scenarios and accessible interactions.
+4. Validate against tests, browser behavior, accessibility, and Figma.
+5. Document findings and delivery status.
+
+## Rules
+- Follow `.cursor/rules/rules.mdc` and `.cursor/rules/architecture.mdc`.
+- Do not edit the approved plan artifact.
+- Keep log entries brief and evidence-based.
+
+## Items
+- source-gates: complete
+- scaffold: complete
+- shell: complete
+- dashboard: complete
+- interactions: in progress
+- validation: pending
+
+## Log
+- Confirmed work is on `cursor/phase-1-setup-d257`.
+- Inspected Figma node `2076:14773`; no authored motion tracks were found.
+- Confirmed Cake& v4.2.4 starter and component/token contracts.
+- `cake-admin/ai-lab` is not accessible; using approved `cake-admin/cakev2` fallback.
+- Scaffolded the official Cake& starter and added lint/test/a11y tooling.
+- Implemented the Figma shell, dashboard composition, local scenarios, and interactions.
+
+## ArchiveLog

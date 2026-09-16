@@ -1,0 +1,36 @@
+---
+description: Vantage Ampersand Phase 1 architecture
+alwaysApply: true
+---
+
+# Architecture
+
+## Runtime
+
+- Vite + React + strict TypeScript.
+- One root `CakeProvider` in `src/App.tsx`.
+- `styled-components` for prototype-specific composition.
+- Cake& CSS custom properties for every visual value.
+- `lucide-react` or exact exported Figma assets for icons.
+
+## Structure
+
+- `src/components/shell/`: Windows frame, title bar, sidebar, and command bar.
+- `src/components/dashboard/`: Home dashboard cards and status visuals.
+- `src/components/prototype/`: non-production scenario controls.
+- `src/data/`: typed mock data, thresholds, and state fixtures.
+- `src/assets/`: exact downloaded Figma assets.
+- `src/styles/`: token-only layout and global prototype composition.
+- `src/test/`: test setup and accessibility helpers.
+
+## State flow
+
+`App` owns the selected destination, scenario, carousel pages, and transient
+feedback. It passes typed data and callbacks into presentational shell and
+dashboard components. No backend or persistence is introduced in Phase 1.
+
+## Design-system gaps
+
+Figma-specific radial status gauges, pager dots, Windows caption controls, and
+the OS Mica shell recipe may be composed locally only when Cake& has no exported
+equivalent. Each local composition must use Cake& tokens and be documented.
