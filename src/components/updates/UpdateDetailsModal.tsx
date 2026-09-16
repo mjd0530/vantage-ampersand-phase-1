@@ -5,6 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   ProgressBar,
+  Scrollbar,
 } from '@cake-admin/cakeand';
 import styled from 'styled-components';
 
@@ -14,9 +15,17 @@ import {
   type UpdateSeverity,
 } from '../../data/updateFlow.js';
 
+/**
+ * Twelve rows are taller than the dialog can grow to, which pushed the footer
+ * past the bottom of the window. Bounding the list keeps the actions reachable.
+ */
+const ListBounds = styled.div`
+  margin-top: var(--space-300);
+`;
+
 const List = styled.ul`
   display: grid;
-  margin: var(--space-300) 0 0;
+  margin: 0;
   padding: 0;
   gap: var(--space-100);
   list-style: none;
@@ -131,21 +140,25 @@ export function UpdateDetailsModal({
             showHelper={false}
           />
         ) : null}
-        <List>
-          {systemUpdates.map((update) => (
-            <Row key={update.id}>
-              <RowText>
-                <Name>{update.name}</Name>
-                <Meta>
-                  Version {update.version} • {update.size}
-                </Meta>
-              </RowText>
-              <Badge color={severityColor[update.severity]} tone="subtle">
-                {severityLabel[update.severity]}
-              </Badge>
-            </Row>
-          ))}
-        </List>
+        <ListBounds>
+          <Scrollbar maxHeight={320}>
+            <List>
+              {systemUpdates.map((update) => (
+                <Row key={update.id}>
+                  <RowText>
+                    <Name>{update.name}</Name>
+                    <Meta>
+                      Version {update.version} • {update.size}
+                    </Meta>
+                  </RowText>
+                  <Badge color={severityColor[update.severity]} tone="subtle">
+                    {severityLabel[update.severity]}
+                  </Badge>
+                </Row>
+              ))}
+            </List>
+          </Scrollbar>
+        </ListBounds>
       </ModalContent>
     </Modal>
   );
