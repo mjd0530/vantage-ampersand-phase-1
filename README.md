@@ -1,7 +1,92 @@
-# cake& prototype
+# Vantage Ampersand Phase 1
 
-A ready-to-run Vite + React + TypeScript app wired to the cake& design system.
-**No GitHub token, no `.npmrc`, no registry setup.**
+A high-fidelity interactive prototype of Lenovo Vantage Home, built from Figma
+node [`2076:14773`](https://www.figma.com/design/uqDOuepZ1Dfzaa9xa78njX/Vantage-Ampersand-redesign?node-id=2076-14773&m=dev)
+with the released Cake& v4.2.4 Dev Kit.
+
+## Implemented
+
+- Windows 11 title bar and token-driven Mica application shell
+- Cake& sidebar navigation and Home command bar
+- Device identity, battery, warranty, support, offer, Smart Performance, and
+  Smart Lock cards
+- Copy feedback, support/offer pagers, navigation panels, update flow, service
+  scan modal, and success/error messaging
+- Deterministic loading, empty, error, and success review states
+- Exact Figma-provided Vantage marks, partner logos, wallpaper, and illustrations
+
+The populated Home screen is the approved visual scope. The linked frame does
+not contain CPU, GPU, memory, or destination-page designs, so those views are
+not invented; non-Home destinations explicitly identify that Phase 1 boundary.
+
+## Cake& reuse
+
+The app consumes `@cake-admin/cakeand` from its version-pinned public release
+tarball and imports all design-system components from the package root. Reused
+components include `CakeProvider`, `Sidebar`, `SidebarNav`, `SidebarItem`,
+`SidebarContent`, `Card`, `Button`, `IconButton`, `Avatar`, `Modal`,
+`ModalContent`, `ModalFooter`, `ProgressBar`, `Spinner`, and `Toast`.
+
+All application styling is built with `styled-components` and Cake& custom
+properties for color, spacing, typography, radius, stroke, and elevation.
+
+## Prototype states
+
+The default URL always opens the exact Home review state. Add
+`?controls=true` to show the review-only state dropdown:
+
+```text
+http://localhost:5173/?controls=true
+```
+
+The dropdown exposes Default, Loading, Empty, Error, and Success. A state can
+also be linked directly with `?scenario=loading` (or `empty`, `error`,
+`success`).
+
+## System gaps
+
+- Cake& documents the Windows `container blur high` recipe but does not export
+  an application-window component, so the shell composes the official surface,
+  OS stroke, elevation, and blur tokens locally.
+- The Figma radial battery/warranty treatment and walkthrough dots have no
+  exported Cake& equivalents. They are isolated token-driven composites.
+- Windows caption controls are platform chrome rather than Cake& content and
+  are isolated in `TitleBar`.
+- The root Cake& package marks its entry as side-effectful and ships its full
+  token stylesheet. Production chunks are warning-free after vendor splitting,
+  but the Cake& JavaScript/CSS payload remains above the aspirational prototype
+  bundle budgets.
+
+## Validation
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+Validation covers six interaction/accessibility tests, including an axe scan.
+The production build is split into app, Cake&, React, and icon chunks with no
+Vite size warning. Chrome geometry at a 1440×1080 viewport is:
+
+- sidebar: 232px
+- dashboard: x=264px, width=1144px
+- top-row cards: 560px / 268px / 268px
+- document overflow: none
+
+## Sources and assumptions
+
+- Figma hierarchy, variables, screenshot, downloadable assets, and recursive
+  motion data were inspected through the configured Figma MCP server. The frame
+  has no authored motion tracks, so only Cake& interaction transitions are used.
+- Cake& Storybook, Dev Kit v4.2.4, `cake-admin/cakev2/AGENTS.md`, the canonical
+  Figma implementation skill, and generated starter context were followed.
+- The requested `cake-admin/ai-lab` repository returned 404 to the authenticated
+  GitHub client. The approved canonical Cake& repository guidance was used as
+  the documented fallback.
+- Device identifiers and asynchronous timing are local mock data. No hardware,
+  account, commerce, or update backend is called.
 
 You need [Node.js](https://nodejs.org/) (LTS). That gives you `npm`. Open a
 terminal and run the steps below. A slower, plain-language walkthrough is on
@@ -10,8 +95,18 @@ the Storybook [Introduction](https://cake.lenovo.com/storybook/?path=/docs/intro
 ## Start
 
 ```bash
-npx degit cake-admin/cakev2/starter my-prototype
-cd my-prototype
+npm install
+npm run dev
+```
+
+Then open the local URL Vite prints, normally
+[`http://localhost:5173`](http://localhost:5173).
+
+This repository was originally scaffolded from:
+
+```bash
+npx degit cake-admin/cakev2/starter vantage-ampersand-phase-1
+cd vantage-ampersand-phase-1
 npm install
 npm run dev
 ```

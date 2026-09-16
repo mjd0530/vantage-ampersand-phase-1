@@ -3,6 +3,8 @@ import { Card, IconButton } from '@cake-admin/cakeand';
 import styled from 'styled-components';
 
 const SizedCard = styled(Card)`
+  width: 100%;
+  min-width: 0;
   height: 264px;
 `;
 

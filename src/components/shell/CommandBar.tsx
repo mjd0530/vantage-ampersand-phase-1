@@ -167,6 +167,7 @@ export function CommandBar({
             size="sm"
             initials="M"
             alt="Mike DeMar"
+            aria-label="Open account menu"
             onClick={() => onAction('Account menu opened')}
           />
         </Utilities>

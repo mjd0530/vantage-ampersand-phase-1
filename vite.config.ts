@@ -3,10 +3,38 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/@cake-admin/cakeand')) return 'cakeand';
+          if (id.includes('node_modules/@radix-ui') || id.includes('node_modules/radix-ui')) {
+            return 'radix';
+          }
+          if (id.includes('node_modules/lucide-react')) return 'icons';
+          if (id.includes('node_modules/styled-components') || id.includes('node_modules/stylis')) {
+            return 'styles';
+          }
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/scheduler')
+          ) {
+            return 'react';
+          }
+          return undefined;
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+    server: {
+      deps: {
+        inline: ['@cake-admin/cakeand'],
+      },
+    },
   },
 
   resolve: {

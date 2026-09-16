@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
+import { describe, expect, it, vi } from 'vitest';
 
 import App from './App.js';
 
@@ -31,11 +32,12 @@ describe('Vantage Ampersand prototype', () => {
 
   it('copies a device identifier and announces success', async () => {
     const user = userEvent.setup();
+    const writeText = vi.spyOn(navigator.clipboard, 'writeText');
     render(<App />);
 
     await user.click(screen.getByRole('button', { name: 'Copy Serial number' }));
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith('PF5LFDXN');
+    expect(writeText).toHaveBeenCalledWith('PF5LFDXN');
     await waitFor(() => {
       expect(screen.getByText('Serial number copied')).toBeInTheDocument();
     });
@@ -69,6 +71,6 @@ describe('Vantage Ampersand prototype', () => {
     const { container } = render(<App />);
     const results = await axe(container);
 
-    expect(results).toHaveNoViolations();
+    expect(results.violations).toEqual([]);
   });
 });

@@ -40,17 +40,26 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-500);
+
+  > * {
+    min-width: 0;
+    max-width: 100%;
+  }
 `;
 
 const DeviceSlot = styled.div`
   grid-column: span 2;
+  min-width: 0;
 `;
 
 const WideSlot = styled.div`
   grid-column: span 2;
+  min-width: 0;
 `;
 
 const FixedCard = styled(Card)`
+  width: 100%;
+  min-width: 0;
   height: 264px;
 `;
 
@@ -82,7 +91,7 @@ const CardTitle = styled.h2`
   white-space: nowrap;
 `;
 
-const DeviceRows = styled.dl`
+const DeviceRows = styled.div`
   display: grid;
   flex: 1;
   margin: 0;
@@ -107,12 +116,11 @@ const DeviceRow = styled.div`
     border-bottom: 0;
   }
 
-  dt,
-  dd {
+  span {
     margin: 0;
   }
 
-  dd {
+  .device-value {
     overflow: hidden;
     text-align: right;
     text-overflow: ellipsis;
@@ -391,8 +399,8 @@ export function Dashboard({
             <DeviceRows>
               {device.details.map((detail) => (
                 <DeviceRow key={detail.label}>
-                  <dt>{detail.label}</dt>
-                  <dd>{detail.value}</dd>
+                  <span>{detail.label}</span>
+                  <span className="device-value">{detail.value}</span>
                   <IconButton
                     label={`Copy ${detail.label}`}
                     icon={<Copy />}

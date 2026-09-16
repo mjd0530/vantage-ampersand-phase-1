@@ -19,8 +19,9 @@ const Window = styled.div`
   box-sizing: border-box;
   min-height: 100vh;
   overflow: hidden;
-  border: var(--space-100) solid var(--color-stroke-border-container-os);
   border-radius: var(--radius-150);
+  outline: var(--space-100) solid var(--color-stroke-border-container-os);
+  outline-offset: calc(-1 * var(--space-100));
   background: var(--color-surfaces-container-blur-high);
   background-clip: padding-box;
   box-shadow: var(--elevation-5);
@@ -29,8 +30,9 @@ const Window = styled.div`
 
 const ShellTabs = styled(Sidebar)`
   display: grid;
-  min-height: calc(100vh - var(--space-800) - (2 * var(--space-100)));
+  min-height: calc(100vh - var(--space-800));
   grid-template-columns: 232px minmax(0, 1fr);
+  gap: 0;
 `;
 
 const Workspace = styled(SidebarContent)`

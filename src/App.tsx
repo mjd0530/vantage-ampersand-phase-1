@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Activity } from 'lucide-react';
 import {
-  Button,
   CakeProvider,
   Card,
   Modal,
@@ -135,12 +134,6 @@ export default function App() {
     return () => window.clearTimeout(timeout);
   }, [notify, scanState]);
 
-  useEffect(() => {
-    if (scenario === 'success') {
-      notify('Device data refreshed', 'success');
-    }
-  }, [notify, scenario]);
-
   const renderPanel = (item: NavigationItem) => (
     <Page>
       <CommandBar
@@ -268,7 +261,15 @@ export default function App() {
       </Modal>
 
       {showControls ? (
-        <ScenarioControl value={scenario} onChange={setScenario} />
+        <ScenarioControl
+          value={scenario}
+          onChange={(nextScenario) => {
+            setScenario(nextScenario);
+            if (nextScenario === 'success') {
+              notify('Device data refreshed', 'success');
+            }
+          }}
+        />
       ) : null}
     </CakeProvider>
   );
