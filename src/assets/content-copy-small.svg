@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon">
+<g id="Bounding box">
+</g>
+<g id="shape">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4 3.3335C4 2.59712 4.59695 2.00016 5.33333 2.00016H12.6667C13.403 2.00016 14 2.59712 14 3.3335V10.6668C14 11.4032 13.403 12.0002 12.6667 12.0002H5.33333C4.59695 12.0002 4 11.4032 4 10.6668V3.3335ZM5.33333 3.3335H12.6667V10.6668H5.33333V3.3335Z" fill="#25262D"/>
+<path d="M3.33333 10.9335V4.66683H2V10.9335C2 12.6272 3.37299 14.0002 5.06667 14.0002H12.6667V12.6668H5.06667C4.10937 12.6668 3.33333 11.8908 3.33333 10.9335Z" fill="#25262D"/>
+</g>
+</g>
+</svg>

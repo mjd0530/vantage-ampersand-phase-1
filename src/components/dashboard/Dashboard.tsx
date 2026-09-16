@@ -350,6 +350,7 @@ export function Dashboard({
         <DeviceInfoCard
           name={device.name}
           details={device.details}
+          size="lrg"
           onMenu={() => onNotify('Device options opened')}
           onCopy={(detail) => {
             void navigator.clipboard.writeText(detail.value);
