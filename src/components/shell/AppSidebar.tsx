@@ -49,7 +49,8 @@ const Rail = styled.div`
     width: 100% !important;
   }
 
-  [data-orientation='vertical'] {
+  /* Hide only the Cake& ScrollArea thumb rail — not Tabs.List (also vertical). */
+  [data-radix-scroll-area-scrollbar] {
     display: none;
   }
 
