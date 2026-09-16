@@ -92,6 +92,14 @@ You need [Node.js](https://nodejs.org/) (LTS). That gives you `npm`. Open a
 terminal and run the steps below. A slower, plain-language walkthrough is on
 the Storybook [Introduction](https://cake.lenovo.com/storybook/?path=/docs/introduction--docs).
 
+## Install on Windows without a toolchain
+
+Every push builds a Windows installer. To run the prototype without installing
+Node or Rust, open the latest green **Windows app** run under the repository's
+[Actions tab](https://github.com/mjd0530/vantage-ampersand-phase-1/actions/workflows/windows-app.yml),
+download the `lenovo-vantage-windows` artifact, unzip it, and run either the
+`.exe` (NSIS) or the `.msi`. Artifacts expire after 90 days.
+
 ## Start as a Windows app
 
 ```bash
