@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Sidebar, SidebarContent } from '@cake-admin/cakeand';
 import styled from 'styled-components';
 
 import wallpaper from '../../assets/wallpaper.png';
 import type { NavigationItem } from '../../data/vantageData.js';
-import { AppSidebar } from './AppSidebar.js';
+import { AppSidebar, COLLAPSED_RAIL, EXPANDED_RAIL } from './AppSidebar.js';
 import { TitleBar } from './TitleBar.js';
 
 const Desktop = styled.div`
@@ -28,11 +28,16 @@ const Window = styled.div`
   backdrop-filter: blur(45px);
 `;
 
-const ShellTabs = styled(Sidebar)`
+const ShellTabs = styled(Sidebar)<{ $navWidth: string }>`
   display: grid;
   min-height: calc(100vh - var(--space-800));
-  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-columns: ${({ $navWidth }) => $navWidth} minmax(0, 1fr);
   gap: 0;
+  transition: grid-template-columns 160ms ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `;
 
 const Workspace = styled(SidebarContent)`
@@ -55,6 +60,8 @@ export function AppShell({
   onSelectedChange,
   renderPanel,
 }: AppShellProps) {
+  const [navCollapsed, setNavCollapsed] = useState(false);
+
   return (
     <Desktop>
       <Window data-node-id="2076:14774">
@@ -63,8 +70,13 @@ export function AppShell({
           value={selected}
           onValueChange={onSelectedChange}
           activationMode="manual"
+          $navWidth={navCollapsed ? COLLAPSED_RAIL : EXPANDED_RAIL}
         >
-          <AppSidebar items={navigation} />
+          <AppSidebar
+            items={navigation}
+            collapsed={navCollapsed}
+            onCollapsedChange={setNavCollapsed}
+          />
           {navigation.map((item) => (
             <Workspace key={item.id} value={item.id}>
               {renderPanel(item)}

@@ -19,29 +19,26 @@ import utilitiesIcon from '../../assets/nav/utilities.svg?raw';
 import vantageAppIcon from '../../assets/vantage-app-icon.svg';
 import type { NavigationItem } from '../../data/vantageData.js';
 
-const Rail = styled.div`
+// Figma pins the expanded rail at 232; Cake& owns the collapsed icon rail.
+export const EXPANDED_RAIL = '232px';
+export const COLLAPSED_RAIL = '96px';
+
+const Rail = styled.div<{ $collapsed: boolean }>`
   position: relative;
   z-index: 2;
-  width: 232px;
-  min-width: 232px;
+  width: ${({ $collapsed }) => ($collapsed ? COLLAPSED_RAIL : EXPANDED_RAIL)};
+  min-width: ${({ $collapsed }) => ($collapsed ? COLLAPSED_RAIL : EXPANDED_RAIL)};
   height: 100%;
   overflow: hidden;
 
-  /* Cake& SidebarNav defaults to 280px; Figma rail is 232×1056. */
+  /* Cake& SidebarNav ships 280/96; the rail width is owned here instead. */
   nav {
     box-sizing: border-box;
-    width: 232px !important;
-    min-width: 232px;
-    max-width: 232px;
+    width: 100% !important;
+    max-width: 100%;
     height: 100%;
     background: transparent;
     border-right: none;
-  }
-
-  /* Figma brand lockup uses space-200 between mark and Lenovo/Vantage. */
-  nav > div > div:first-child {
-    gap: var(--space-200);
-    padding-right: 0;
   }
 
   /* Reclaim Cake& scrollbar gutter so labels match the 232px Figma column. */
@@ -54,9 +51,15 @@ const Rail = styled.div`
     display: none;
   }
 
-  /* No collapse/user in this shell — hide the empty footer rule. */
-  nav > div:last-child {
-    display: none;
+  /* Collapsed rows centre their glyph and hide labels via Cake&'s own rules. */
+  ${({ $collapsed }) =>
+    $collapsed
+      ? ''
+      : `
+  /* Figma brand lockup uses space-200 between mark and Lenovo/Vantage. */
+  nav > div > div:first-child {
+    gap: var(--space-200);
+    padding-right: 0;
   }
 
   /* Show full Figma labels (Identity Advisor / Smart Performance) without ellipsis. */
@@ -65,6 +68,7 @@ const Rail = styled.div`
     text-overflow: unset;
     white-space: normal;
   }
+  `}
 `;
 
 const BrandIcon = styled.img`
@@ -110,20 +114,24 @@ const icons: Record<NavigationItem['icon'], string> = {
 
 type AppSidebarProps = {
   items: NavigationItem[];
+  collapsed: boolean;
+  onCollapsedChange: (collapsed: boolean) => void;
 };
 
-export function AppSidebar({ items }: AppSidebarProps) {
+export function AppSidebar({ items, collapsed, onCollapsedChange }: AppSidebarProps) {
   const mainItems = items.filter((item) => item.group === 'main');
   const proItems = items.filter((item) => item.group === 'pro');
 
   return (
-    <Rail data-node-id="2076:14793">
+    <Rail $collapsed={collapsed} data-node-id="2076:14793">
       <SidebarNav
         aria-label="Vantage navigation"
         logo={<BrandIcon src={vantageAppIcon} alt="" />}
         productName="Lenovo"
         appName="Vantage"
         surface="translucent"
+        collapsed={collapsed}
+        onCollapsedChange={onCollapsedChange}
       >
         {mainItems.map((item) => (
           <SidebarItem

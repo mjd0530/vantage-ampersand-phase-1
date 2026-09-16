@@ -42,6 +42,22 @@ describe('Vantage Ampersand prototype', () => {
     ).toBeInTheDocument();
   });
 
+  it('collapses and expands the Cake sidebar rail', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: 'Collapse sidebar' }));
+
+    const expand = screen.getByRole('button', { name: 'Expand sidebar' });
+    expect(expand).toBeInTheDocument();
+    // Collapsing hides labels visually but keeps every row's accessible name.
+    expect(screen.getByRole('tab', { name: 'Lenovo Smart Performance' })).toBeInTheDocument();
+
+    await user.click(expand);
+
+    expect(screen.getByRole('button', { name: 'Collapse sidebar' })).toBeInTheDocument();
+  });
+
   it('copies a device identifier and announces success', async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, 'writeText');
