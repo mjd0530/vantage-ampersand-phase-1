@@ -15,9 +15,12 @@ import { createRoot } from 'react-dom/client';
 import '@cake-admin/cakeand/cakeand.css';
 
 import App from './App.js';
+import { revealDesktopWindow } from './desktop/windowApi.js';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
   </StrictMode>,
 );
+
+void revealDesktopWindow();

@@ -31,7 +31,8 @@ Epic: VA-P1 / Phase 5 Windows-app launch
 - validation: complete
 
 ## Log
-- Added Electron local launch (`npm run start:windows`) with frameless 1440×1080 chrome.
+- Added a Tauri shell as the default local Windows-app launch; verified window, navigation, copy toast, and maximize/restore.
+- Added Electron local launch with frameless 1440×1080 chrome, now `npm run start:electron`.
 - Confirmed work is on `cursor/phase-1-setup-d257`.
 - Inspected Figma node `2076:14773`; no authored motion tracks were found.
 - Confirmed Cake& v4.2.4 starter and component/token contracts.

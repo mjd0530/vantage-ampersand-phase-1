@@ -1,9 +1,13 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
+// A packaged Electron build reads the renderer off the filesystem, so it needs
+// relative asset paths. Tauri and every dev server load over http.
 const isElectron = process.env.ELECTRON === '1';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  // `--mode desktop` is set by the shells that host their own window, and is
+  // used instead of an env var so the scripts stay portable to Windows.
   base: isElectron ? './' : '/',
   plugins: [react()],
   build: {
@@ -51,9 +55,10 @@ export default defineConfig({
   },
 
   server: {
-    open: !isElectron,
-    host: isElectron ? '127.0.0.1' : undefined,
+    open: mode !== 'desktop',
     port: 5173,
-    strictPort: isElectron,
+    // The desktop shells are configured to load port 5173. Falling back to the
+    // next free port would leave them pointed at a dead URL, so fail loudly.
+    strictPort: true,
   },
-});
+}));

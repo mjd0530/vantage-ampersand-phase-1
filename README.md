@@ -99,13 +99,30 @@ npm install
 npm run start:windows
 ```
 
-This boots the Vite renderer and opens Lenovo Vantage in a frameless 1440×1080
-desktop window (Electron) with a draggable title bar and working minimize,
-maximize, and close controls. Use this for local Windows-app review.
+This runs the Tauri shell: it boots the Vite renderer and opens Lenovo Vantage
+in a frameless 1440×1080 desktop window with a draggable title bar and working
+minimize, maximize, and close controls. On Windows it renders through the
+built-in WebView2 runtime, so the shipped binary stays small and no Chromium
+copy is bundled.
 
-On Windows, macOS, and Linux the same command launches the native desktop
-window. A browser-only session is still available with `npm run dev`, which
-prints a URL, normally [`http://localhost:5173`](http://localhost:5173).
+Tauri needs the [Rust toolchain](https://rustup.rs/) (1.85 or newer) in addition
+to Node. The first launch compiles the Rust shell and takes a few minutes;
+later launches start in seconds.
+
+To produce a distributable Windows installer:
+
+```bash
+npm run tauri:build
+```
+
+An Electron shell is also kept for comparison and runs without Rust:
+
+```bash
+npm run start:electron
+```
+
+A browser-only session is still available with `npm run dev`, which prints a
+URL, normally [`http://localhost:5173`](http://localhost:5173).
 
 This repository was originally scaffolded from:
 

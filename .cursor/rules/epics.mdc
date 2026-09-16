@@ -32,3 +32,4 @@ Status: Complete
 ### Phase 5 — Local Windows-app launch
 - [x] Wrap the prototype in a frameless Electron window.
 - [x] Wire title-bar caption controls and local `npm run start:windows` launch.
+- [x] Add a Tauri shell and make it the default `npm run start:windows` target.

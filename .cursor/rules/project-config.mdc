@@ -11,7 +11,7 @@ alwaysApply: true
 - Vite 8
 - Cake& v4.2.4
 - styled-components
-- Electron (local Windows-app shell)
+- Tauri 2 (local Windows-app shell; Electron kept as an alternative)
 - Vitest and Testing Library
 
 ## Critical Patterns & Conventions
@@ -24,4 +24,5 @@ alwaysApply: true
 
 ## Changelog
 - Added a local Electron Windows-app launch path (`npm run start:windows`) with frameless chrome and live caption controls.
+- Moved `npm run start:windows` to a Tauri shell rendering through the OS webview, behind one shared desktop window API.
 - Completed the Figma-accurate Vantage Ampersand Phase 1 Home prototype with Cake& components, tokenized Mica styling, interactions, scenario states, and automated accessibility validation.

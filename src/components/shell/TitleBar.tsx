@@ -79,8 +79,8 @@ export function TitleBar() {
   const desktop = getDesktopApi();
 
   return (
-    <Bar data-node-id="2076:14775">
-      <Identity>
+    <Bar data-node-id="2076:14775" data-tauri-drag-region>
+      <Identity data-tauri-drag-region>
         <AppIcon src={vantageTitleIcon} alt="" />
         <span>Lenovo Vantage</span>
       </Identity>
