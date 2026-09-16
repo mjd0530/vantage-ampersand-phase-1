@@ -126,7 +126,11 @@ export const updateFlowCopy = {
 } as const;
 
 /** Milliseconds between progress ticks while a scan or install runs. */
-export const updateProgressIntervalMs = 60;
+export const updateProgressIntervalMs = 120;
 
-/** Progress added on each tick, so a run takes a little over a second. */
-export const updateProgressStep = 5;
+/**
+ * Progress added on each tick. 25 ticks puts a run at about three seconds —
+ * long enough that the two progress frames are actually readable, which a
+ * sub-second run is not.
+ */
+export const updateProgressStep = 4;

@@ -107,8 +107,10 @@ npm test
 npm run build
 ```
 
-Validation covers fifteen interaction/accessibility tests, including axe scans
-of the default view and of a running update scan.
+Validation covers twenty-two interaction/accessibility tests, including axe
+scans of the default view and of a running update scan. The update flow is
+covered twice: the machine itself with fast injected timings, and the rendered
+toasts through the real progress intervals.
 The production build is split into app, Cake&, React, and icon chunks with no
 Vite size warning. Chrome geometry at a 1440×1080 viewport is:
 

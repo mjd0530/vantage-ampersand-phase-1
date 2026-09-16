@@ -28,7 +28,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByText(`(${count}) Updates found`)).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     expect(
       screen.getByText('We recommend installing these updates as soon as possible.'),
@@ -45,7 +45,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByRole('button', { name: 'Install' })).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     await user.click(screen.getByRole('button', { name: 'Install' }));
 
@@ -62,7 +62,7 @@ describe('check for updates flow', () => {
           screen.getByText(`(${count}) Updates successfully installed`),
         ).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
   });
 
@@ -74,7 +74,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByRole('button', { name: 'Install' })).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     await user.click(screen.getByRole('button', { name: 'Install' }));
     await user.click(screen.getByRole('button', { name: 'Cancel' }));
@@ -95,7 +95,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByText('Update scan failed')).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     const more = screen.getByRole('button', { name: 'More', expanded: false });
 
@@ -120,7 +120,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByText(`(${count}) Updates found`)).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     await user.click(screen.getAllByRole('button', { name: 'View details' })[0]);
 
@@ -138,7 +138,7 @@ describe('check for updates flow', () => {
       () => {
         expect(screen.getByText(`(${count}) Updates found`)).toBeInTheDocument();
       },
-      { timeout: 4000 },
+      { timeout: 8000 },
     );
     await user.click(screen.getByRole('button', { name: 'Dismiss notification' }));
 
