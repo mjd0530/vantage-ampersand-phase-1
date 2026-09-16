@@ -5,17 +5,17 @@ import {
 } from '@cake-admin/cakeand';
 import styled from 'styled-components';
 
-import downloadIcon from '../../assets/nav/download.svg';
-import homeIcon from '../../assets/nav/home.svg';
-import identityIcon from '../../assets/nav/identity.svg';
-import lockIcon from '../../assets/nav/lock.svg';
-import partsIcon from '../../assets/nav/parts.svg';
-import performanceIcon from '../../assets/nav/performance.svg';
-import scanIcon from '../../assets/nav/scan.svg';
-import securityIcon from '../../assets/nav/security.svg';
-import settingsIcon from '../../assets/nav/settings.svg';
-import supportIcon from '../../assets/nav/support.svg';
-import utilitiesIcon from '../../assets/nav/utilities.svg';
+import downloadIcon from '../../assets/nav/download.svg?raw';
+import homeIcon from '../../assets/nav/home.svg?raw';
+import identityIcon from '../../assets/nav/identity.svg?raw';
+import lockIcon from '../../assets/nav/lock.svg?raw';
+import partsIcon from '../../assets/nav/parts.svg?raw';
+import performanceIcon from '../../assets/nav/performance.svg?raw';
+import scanIcon from '../../assets/nav/scan.svg?raw';
+import securityIcon from '../../assets/nav/security.svg?raw';
+import settingsIcon from '../../assets/nav/settings.svg?raw';
+import supportIcon from '../../assets/nav/support.svg?raw';
+import utilitiesIcon from '../../assets/nav/utilities.svg?raw';
 import vantageAppIcon from '../../assets/vantage-app-icon.svg';
 import type { NavigationItem } from '../../data/vantageData.js';
 
@@ -74,33 +74,38 @@ const BrandIcon = styled.img`
   border-radius: var(--radius-150);
 `;
 
-const NavGlyph = styled.span<{ $src: string }>`
-  display: block;
+const NavGlyph = styled.span`
+  display: inline-flex;
+  flex: none;
   width: var(--space-500);
   height: var(--space-500);
-  background-color: currentColor;
-  mask-image: url(${(props) => props.$src});
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-image: url(${(props) => props.$src});
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
+  color: currentColor;
+
+  svg {
+    display: block;
+    width: var(--space-500);
+    height: var(--space-500);
+  }
 `;
 
+function toCurrentColorSvg(markup: string): string {
+  return markup
+    .replaceAll('fill="black"', 'fill="currentColor"')
+    .replaceAll("fill='black'", "fill='currentColor'");
+}
+
 const icons: Record<NavigationItem['icon'], string> = {
-  home: homeIcon,
-  settings: settingsIcon,
-  download: downloadIcon,
-  scan: scanIcon,
-  security: securityIcon,
-  utilities: utilitiesIcon,
-  support: supportIcon,
-  identity: identityIcon,
-  performance: performanceIcon,
-  lock: lockIcon,
-  parts: partsIcon,
+  home: toCurrentColorSvg(homeIcon),
+  settings: toCurrentColorSvg(settingsIcon),
+  download: toCurrentColorSvg(downloadIcon),
+  scan: toCurrentColorSvg(scanIcon),
+  security: toCurrentColorSvg(securityIcon),
+  utilities: toCurrentColorSvg(utilitiesIcon),
+  support: toCurrentColorSvg(supportIcon),
+  identity: toCurrentColorSvg(identityIcon),
+  performance: toCurrentColorSvg(performanceIcon),
+  lock: toCurrentColorSvg(lockIcon),
+  parts: toCurrentColorSvg(partsIcon),
 };
 
 type AppSidebarProps = {
@@ -124,7 +129,12 @@ export function AppSidebar({ items }: AppSidebarProps) {
           <SidebarItem
             key={item.id}
             value={item.id}
-            icon={<NavGlyph $src={icons[item.icon]} />}
+            icon={
+              <NavGlyph
+                aria-hidden
+                dangerouslySetInnerHTML={{ __html: icons[item.icon] }}
+              />
+            }
           >
             {item.label}
           </SidebarItem>
@@ -134,7 +144,12 @@ export function AppSidebar({ items }: AppSidebarProps) {
           <SidebarItem
             key={item.id}
             value={item.id}
-            icon={<NavGlyph $src={icons[item.icon]} />}
+            icon={
+              <NavGlyph
+                aria-hidden
+                dangerouslySetInnerHTML={{ __html: icons[item.icon] }}
+              />
+            }
           >
             {item.label}
           </SidebarItem>
