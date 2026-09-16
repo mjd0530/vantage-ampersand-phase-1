@@ -251,9 +251,10 @@ const ServiceMedia = styled.div`
   background: var(--color-surfaces-on-container-high);
 `;
 
-const ServiceImage = styled.img`
-  width: 92%;
-  height: 82%;
+// Intrinsic media geometry from Figma nodes 2076:14830 and 2076:14831.
+const ServiceImage = styled.img<{ $kind: PartnerService['id'] }>`
+  width: ${({ $kind }) => ($kind === 'performance' ? '173px' : '175px')};
+  height: ${({ $kind }) => ($kind === 'performance' ? '160px' : '118px')};
   object-fit: contain;
 `;
 
@@ -272,10 +273,10 @@ const PoweredBy = styled.div`
   font-size: var(--type-size-subject);
 `;
 
-const PartnerLogo = styled.img`
-  width: auto;
-  max-width: 136px;
-  height: var(--space-500);
+// Exact instance boxes from the same Figma service-card nodes.
+const PartnerLogo = styled.img<{ $kind: PartnerService['id'] }>`
+  width: ${({ $kind }) => ($kind === 'performance' ? '135px' : '112px')};
+  height: ${({ $kind }) => ($kind === 'performance' ? '24px' : '14px')};
   object-fit: contain;
 `;
 
@@ -551,6 +552,7 @@ export function Dashboard({
             <ServiceBody aria-labelledby={`${service.id}-heading`}>
               <ServiceMedia>
                 <ServiceImage
+                  $kind={service.id}
                   src={service.id === 'performance' ? smartPerformance : smartLock}
                   alt=""
                 />
@@ -559,6 +561,7 @@ export function Dashboard({
                 <PoweredBy>
                   <span>Powered by</span>
                   <PartnerLogo
+                    $kind={service.id}
                     src={service.id === 'performance' ? sutherlandLogo : absoluteLogo}
                     alt={service.partner}
                   />

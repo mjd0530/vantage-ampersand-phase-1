@@ -38,11 +38,12 @@ const StatusIcon = styled.img`
   height: var(--space-500);
 `;
 
+// Figma node 2076:15000 defines the large status graphic as 120×120.
 const Gauge = styled.div`
   position: relative;
   display: grid;
-  width: 112px;
-  height: 112px;
+  width: 120px;
+  height: 120px;
   margin-top: var(--space-300);
   place-items: center;
 
@@ -149,13 +150,13 @@ export function StatusCard({
           />
         </Header>
         <Gauge aria-hidden="true">
-          <svg viewBox="0 0 112 112">
-            <circle className="track" cx="56" cy="56" r="44" pathLength="100" />
+          <svg viewBox="0 0 120 120">
+            <circle className="track" cx="60" cy="60" r="48" pathLength="100" />
             <circle
               className="value"
-              cx="56"
-              cy="56"
-              r="44"
+              cx="60"
+              cy="60"
+              r="48"
               pathLength="100"
               strokeDasharray={`${value} 100`}
             />
